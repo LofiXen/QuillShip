@@ -9,6 +9,13 @@
 <style>
 /* Body and fonts */
 body {
+    cursor: none;
+    margin: 0;
+    background: #f2e9dc;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+}
+	body {
     margin: 0;
     background: #f2e9dc;
     font-family: 'Cormorant Garamond', serif;
@@ -259,8 +266,10 @@ body {
 
 <body>
 
+<img src="QuillCursor.png" id="quill-cursor">
+
 <!-- MUSIC -->
-<audio id="ship-music" loop autoplay muted>
+<audio id="ship-music" loop>
     <source src="Docks - Granulation 2.mp3" type="audio/mpeg">
 </audio>
 <button id="music-toggle">🔊</button>
@@ -299,6 +308,8 @@ entry.addEventListener("input", () => {
 const music = document.getElementById("ship-music");
 const toggleBtn = document.getElementById("music-toggle");
 
+let hasStarted = false;
+
 function fadeIn(audio) {
     let vol = 0;
     audio.volume = 0;
@@ -314,10 +325,16 @@ function fadeIn(audio) {
     }, 200);
 }
 
-window.addEventListener("load", () => {
-    setTimeout(() => fadeIn(music), 800);
+// Start music on FIRST interaction
+document.addEventListener("click", () => {
+    if (!hasStarted) {
+        music.play();
+        fadeIn(music);
+        hasStarted = true;
+    }
 });
 
+// Toggle button
 toggleBtn.addEventListener("click", () => {
     if (music.paused) {
         music.play();
