@@ -71,6 +71,12 @@ body {
     overflow: hidden;
 }
 
+/* Placeholder styling */
+.entry::placeholder {
+    color: rgba(70, 50, 30, 0.45);
+    font-style: italic;
+}
+
 /* Parchment tint and grain */
 .entry::before {
     content: "";
@@ -91,7 +97,7 @@ body {
     z-index: -1;
 }
 
-/* Notebook + Sidebar layout */
+/* Layout */
 .notebook-with-sidebar {
     display: flex;
     max-width: 1000px;
@@ -114,7 +120,6 @@ body {
     z-index: 2;
 }
 
-/* Add note button */
 #add-note {
     background: #d1bfa3;
     border: none;
@@ -136,10 +141,10 @@ body {
     cursor: grab;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 6px;
-    z-index: 10; /* ensures above parchment */
+    z-index: 10;
 }
 
-/* Sticky note colors (15 vintage shades) */
+/* Colors */
 .sticky-colors {
     display: flex;
     flex-wrap: wrap;
@@ -154,7 +159,6 @@ body {
     border: 1px solid #555;
 }
 
-/* Vintage colors */
 .color-1 { background:#c8a16d; }
 .color-2 { background:#e2cba9; }
 .color-3 { background:#b5c99a; }
@@ -171,7 +175,7 @@ body {
 .color-14 { background:#b3a18a; }
 .color-15 { background:#d2c1a3; }
 
-/* Music toggle button */
+/* Music button */
 #music-toggle {
     position: fixed;
     top: 10px;
@@ -183,18 +187,16 @@ body {
     font-family: 'Cormorant Garamond', serif;
     cursor: pointer;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- Music -->
-<audio id="ship-music" loop autoplay>
-    <source src="Docks - Granulation 2.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
+<!-- MUSIC -->
+<audio id="ship-music" loop autoplay muted>
+    <source src="docks.mp3" type="audio/mpeg">
 </audio>
-<button id="music-toggle">🔊 Play/Pause Music</button>
+<button id="music-toggle">🔊</button>
 
 <div class="notebook-with-sidebar">
     <div class="sidebar">
@@ -213,7 +215,7 @@ body {
 </div>
 
 <script>
-// Notebook text auto-save
+// Journal save
 const entry = document.querySelector(".entry");
 entry.value = localStorage.getItem("journalEntry") || "";
 entry.style.height = entry.scrollHeight + 'px';
@@ -223,24 +225,41 @@ entry.addEventListener("input", () => {
     localStorage.setItem("journalEntry", entry.value);
 });
 
-// Music toggle
+// MUSIC (fade-in system)
 const music = document.getElementById("ship-music");
 const toggleBtn = document.getElementById("music-toggle");
-music.volume = 0.3; // subtle volume
-toggleBtn.addEventListener("click", () => {
-    if(music.paused) music.play();
-    else music.pause();
+
+function fadeIn(audio) {
+    let vol = 0;
+    audio.volume = 0;
+    audio.muted = false;
+
+    const interval = setInterval(() => {
+        if (vol < 0.3) {
+            vol += 0.01;
+            audio.volume = vol;
+        } else {
+            clearInterval(interval);
+        }
+    }, 200);
+}
+
+window.addEventListener("load", () => {
+    setTimeout(() => fadeIn(music), 800);
 });
 
-// Sticky notes
-const sidebar = document.querySelector(".sidebar");
-const addBtn = document.getElementById("add-note");
+toggleBtn.addEventListener("click", () => {
+    if (music.paused) {
+        music.play();
+        toggleBtn.textContent = "🔊";
+    } else {
+        music.pause();
+        toggleBtn.textContent = "🔇";
+    }
+});
 
-const vintageColors = [
-    'color-1','color-2','color-3','color-4','color-5',
-    'color-6','color-7','color-8','color-9','color-10',
-    'color-11','color-12','color-13','color-14','color-15'
-];
+// Sticky notes (unchanged logic)
+const addBtn = document.getElementById("add-note");
 
 addBtn.addEventListener("click", () => {
     const note = document.createElement("div");
@@ -249,50 +268,52 @@ addBtn.addEventListener("click", () => {
     note.innerText = "New Note...";
     note.style.top = "50px";
     note.style.left = "220px";
-    
-    // Dragging
+
     note.addEventListener("mousedown", dragMouseDown);
-    
-    // Add color options
+
     const colorSelector = document.createElement("div");
     colorSelector.className = "sticky-colors";
-    vintageColors.forEach(color => {
+
+    const colors = [
+        'color-1','color-2','color-3','color-4','color-5',
+        'color-6','color-7','color-8','color-9','color-10',
+        'color-11','color-12','color-13','color-14','color-15'
+    ];
+
+    colors.forEach(color => {
         const c = document.createElement("div");
         c.className = `color-option ${color}`;
         c.addEventListener("click", (e) => {
             note.className = "sticky-note " + color;
-            colorSelector.style.display = "none"; // hide after selection
+            colorSelector.style.display = "none";
             e.stopPropagation();
         });
         colorSelector.appendChild(c);
     });
+
     note.appendChild(colorSelector);
-    
-    document.body.appendChild(note); // append over notebook
+    document.body.appendChild(note);
 });
 
-// Drag function
 function dragMouseDown(e) {
     e.preventDefault();
     const note = e.target.closest(".sticky-note");
-    let pos1 = 0, pos2 = 0, pos3 = e.clientX, pos4 = e.clientY;
-    document.onmousemove = elementDrag;
-    document.onmouseup = closeDragElement;
 
-    function elementDrag(e) {
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
+    let pos3 = e.clientX, pos4 = e.clientY;
+
+    document.onmousemove = (e) => {
+        let pos1 = pos3 - e.clientX;
+        let pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
+
         note.style.top = (note.offsetTop - pos2) + "px";
         note.style.left = (note.offsetLeft - pos1) + "px";
-        note.style.position = "absolute";
-    }
+    };
 
-    function closeDragElement() {
-        document.onmouseup = null;
+    document.onmouseup = () => {
         document.onmousemove = null;
-    }
+    };
 }
 </script>
 
