@@ -9,13 +9,7 @@
 <style>
 /* Body and fonts */
 body {
-    cursor: none;
-    margin: 0;
-    background: #f2e9dc;
-    font-family: 'Cormorant Garamond', serif;
-    overflow-x: hidden;
-}
-	body {
+    cursor: none! important;
     margin: 0;
     background: #f2e9dc;
     font-family: 'Cormorant Garamond', serif;
@@ -253,13 +247,12 @@ body {
 
 /* Quill cursor */
 #quill-cursor {
-	position: absolute;
+	position: fixed;
     width: 60px;
     height: 60px;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-10px, -10px);
-    transition: transform 0.05s ease;
 }
 </style>
 </head>
@@ -523,7 +516,8 @@ notes.forEach(n => createNote(n));
 // Quill cursor follow
 const quillCursor = document.getElementById("quill-cursor");
 document.addEventListener("mousemove", (e) => {
-	quillCursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+	quillCursor.style.left = e.clientX + "px";
+	quillCursor.style.top = e.clientY + "px";
 });
 </script>
 
