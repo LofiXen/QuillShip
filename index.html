@@ -155,7 +155,7 @@ body {
     width: 20px;
     height: 20px;
     border-radius: 3px;
-    cursor: pointer;
+    cursor: inherit;
     border: 1px solid #555;
 }
 
@@ -185,8 +185,20 @@ body {
     border: none;
     padding: 6px 10px;
     font-family: 'Cormorant Garamond', serif;
-    cursor: pointer;
+    cursor: inherit;
 }
+
+/* Quill cursor */
+#quill-cursor {
+	position: absolute;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-10px, -10px);
+    transition: transform 0.05s ease;
+}
+
 </style>
 </head>
 
@@ -315,6 +327,13 @@ function dragMouseDown(e) {
         document.onmousemove = null;
     };
 }
+
+// Quill cursor follow
+const quillCursor = document.getElementById("quill-cursor");
+document.addEventListener("mousemove", (e) => {
+	quillCursor.style.transform = 'translate(${e.clientX - 10}px, ${e.clientY - 10}px)';
+});
+
 </script>
 
 </body>
