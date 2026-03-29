@@ -252,7 +252,6 @@ body {
     height: 60px;
     pointer-events: none;
     z-index: 9999;
-    transform: translate(-10px, -10px);
 }
 </style>
 </head>
@@ -516,8 +515,8 @@ notes.forEach(n => createNote(n));
 // Quill cursor follow
 const quillCursor = document.getElementById("quill-cursor");
 document.addEventListener("mousemove", (e) => {
-	quillCursor.style.left = e.clientX + "px";
-	quillCursor.style.top = e.clientY + "px";
+    quillCursor.style.transform =
+        `translate(${e.clientX}px, ${e.clientY}px) translate(-5px, -55px)`;
 });
 </script>
 
