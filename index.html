@@ -9,11 +9,15 @@
 <style>
 /* Body and fonts */
 body {
-    cursor: none! important;
+    cursor: none !important;
 }
 
-input, textarea, button, a {
+body, input, textarea, button, a {
 	cursor: none !important;
+}
+
+.entry {
+	caret-color: transparent;
 }
 
 body {
@@ -283,7 +287,8 @@ body {
             <div class="notebook">
                 <div class="title">QuillShip</div>
                 <div class="subtitle">Flick your quill and calm your mind.</div>
-                <textarea class="entry" placeholder="The ink won’t write itself..."></textarea>
+                <textarea class="entry" placeholder="The ink won’t write itself...">
+                </textarea>
             </div>
         </div>
     </div>
