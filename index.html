@@ -10,6 +10,13 @@
 /* Body and fonts */
 body {
     cursor: none! important;
+}
+
+input, textarea, button, a {
+	cursor: none !important;
+}
+
+body {
     margin: 0;
     background: #f2e9dc;
     font-family: 'Cormorant Garamond', serif;
@@ -514,9 +521,17 @@ notes.forEach(n => createNote(n));
 
 // Quill cursor follow
 const quillCursor = document.getElementById("quill-cursor");
+
 document.addEventListener("mousemove", (e) => {
     quillCursor.style.transform =
-        `translate(${e.clientX}px, ${e.clientY}px) translate(-8px, -68px)`;
+        `translate(${e.clientX}px, ${e.clientY}px) translate(-5px, -55px)`;
+});
+
+document.addEventListener("mousedown", () => {
+    quillCursor.style.transform += " scale(0.95)";
+});
+document.addEventListener("mouseup", () => {
+    quillCursor.style.transform = quillCursor.style.transform.replace(" scale(0.95)", "");
 });
 </script>
 
