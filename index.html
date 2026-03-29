@@ -7,99 +7,293 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Inter&display=swap" rel="stylesheet">
 
 <style>
+/* Body and fonts */
 body {
     margin: 0;
     background: #f2e9dc;
     font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+}
+
+/* Frame containing notebook */
+.frame {
+    position: relative;
+    width: 740px;
+    margin: 60px auto;
 }
 
 /* Notebook */
 .notebook {
     width: 700px;
-    margin: 60px auto;
-    padding: 40px;
-    background: #fffaf3;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    border-radius: 14px;
-    border: 20px solid transparent;
-    border-image: url('https://i.imgur.com/I8Vytz8.jpeg') 30 round;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent;
     box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 }
 
-/* Title */
+/* Titles */
 .title {
     font-size: 32px;
     color: #5a4330;
-    margin-bottom: 10px;
+    margin: 0 40px 10px;
 }
-
-/* Subtitle */
 .subtitle {
     font-size: 13px;
     color: #9c8570;
-    margin-bottom: 25px;
+    margin: 0 40px 25px;
     font-style: italic;
     letter-spacing: 0.5px;
 }
 
 /* Writing area */
 .entry {
+    position: relative;
+    z-index: 1;
     width: 100%;
     min-height: 300px;
     border: none;
     resize: none;
     font-size: 18px;
-    
-    /* Use your parchment image */
-    color: #382514;
-    background: url('https://i.imgur.com/I8Vytz8.jpeg') no-repeat;
-    background-size: cover;
+    background: url('https://i.imgur.com/vKA1DiL.png') repeat-y;
+    background-size: 100% auto;
     background-position: top center;
-    color: #1e0f00;
-    text-shadow: 0 0 1px #000000;
-}
-	.entry::before {
-    	content: "";
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(255, 255, 255, 0.3); /* semi-transparent overlay */
-        pointer-events: none;
-}
-
-.entry {
-    outline: none;
+    color: #2a1408;
+    text-shadow:
+        0.3px 0.3px 0 #1a0d05,
+        0.5px 0.5px 0 rgba(0,0,0,0.2);
     font-family: 'Cormorant Garamond', serif;
     line-height: 1.6;
-    padding: 40px;
+    padding: 60px 50px;
     box-sizing: border-box;
+    outline: none;
     overflow: hidden;
 }
+
+/* Parchment tint and grain */
+.entry::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(90, 60, 30, 0.12);
+    pointer-events: none;
+    z-index: -1;
+}
+.entry::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('https://i.imgur.com/8Qf6YQK.png');
+    opacity: 0.08;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    z-index: -1;
+}
+
+/* Notebook + Sidebar layout */
+.notebook-with-sidebar {
+    display: flex;
+    max-width: 1000px;
+    margin: 40px auto;
+    position: relative;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 200px;
+    min-width: 200px;
+    background: #f2e9dc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-right: 2px solid #d1bfa3;
+    overflow-y: auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Add note button */
+#add-note {
+    background: #d1bfa3;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* Sticky notes */
+.sticky-note {
+    position: absolute;
+    padding: 10px;
+    min-width: 100px;
+    min-height: 80px;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1.4;
+    resize: both;
+    overflow: auto;
+    cursor: grab;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    z-index: 10; /* ensures above parchment */
+}
+
+/* Sticky note colors (15 vintage shades) */
+.sticky-colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+}
+.color-option {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid #555;
+}
+
+/* Vintage colors */
+.color-1 { background:#c8a16d; }
+.color-2 { background:#e2cba9; }
+.color-3 { background:#b5c99a; }
+.color-4 { background:#a36e4c; }
+.color-5 { background:#f0d8c0; }
+.color-6 { background:#d9b48f; }
+.color-7 { background:#8c6b4f; }
+.color-8 { background:#d0a67b; }
+.color-9 { background:#9a7d63; }
+.color-10 { background:#c0b283; }
+.color-11 { background:#b8a17a; }
+.color-12 { background:#726255; }
+.color-13 { background:#6e584f; }
+.color-14 { background:#b3a18a; }
+.color-15 { background:#d2c1a3; }
+
+/* Music toggle button */
+#music-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 5000;
+    background: #d1bfa3;
+    border: none;
+    padding: 6px 10px;
+    font-family: 'Cormorant Garamond', serif;
+    cursor: pointer;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="notebook">
-    <div class="title">QuillShip</div>
-    <div class="subtitle">Flick your quill and calm your mind.</div>
+<!-- Music -->
+<audio id="ship-music" loop autoplay>
+    <source src="Docks - Granulation 2.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<button id="music-toggle">🔊 Play/Pause Music</button>
 
-    <textarea class="entry" placeholder="The ink won’t write itself..."></textarea>
+<div class="notebook-with-sidebar">
+    <div class="sidebar">
+        <button id="add-note">+ Add Note</button>
+    </div>
+
+    <div class="main-notebook">
+        <div class="frame">
+            <div class="notebook">
+                <div class="title">QuillShip</div>
+                <div class="subtitle">Flick your quill and calm your mind.</div>
+                <textarea class="entry" placeholder="The ink won’t write itself..."></textarea>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
+// Notebook text auto-save
 const entry = document.querySelector(".entry");
-
-// Load saved text and set height
 entry.value = localStorage.getItem("journalEntry") || "";
 entry.style.height = entry.scrollHeight + 'px';
-
-// Save as you type and auto-resize
 entry.addEventListener("input", () => {
     entry.style.height = 'auto';
     entry.style.height = entry.scrollHeight + 'px';
     localStorage.setItem("journalEntry", entry.value);
 });
+
+// Music toggle
+const music = document.getElementById("ship-music");
+const toggleBtn = document.getElementById("music-toggle");
+music.volume = 0.3; // subtle volume
+toggleBtn.addEventListener("click", () => {
+    if(music.paused) music.play();
+    else music.pause();
+});
+
+// Sticky notes
+const sidebar = document.querySelector(".sidebar");
+const addBtn = document.getElementById("add-note");
+
+const vintageColors = [
+    'color-1','color-2','color-3','color-4','color-5',
+    'color-6','color-7','color-8','color-9','color-10',
+    'color-11','color-12','color-13','color-14','color-15'
+];
+
+addBtn.addEventListener("click", () => {
+    const note = document.createElement("div");
+    note.contentEditable = "true";
+    note.className = "sticky-note color-1";
+    note.innerText = "New Note...";
+    note.style.top = "50px";
+    note.style.left = "220px";
+    
+    // Dragging
+    note.addEventListener("mousedown", dragMouseDown);
+    
+    // Add color options
+    const colorSelector = document.createElement("div");
+    colorSelector.className = "sticky-colors";
+    vintageColors.forEach(color => {
+        const c = document.createElement("div");
+        c.className = `color-option ${color}`;
+        c.addEventListener("click", (e) => {
+            note.className = "sticky-note " + color;
+            colorSelector.style.display = "none"; // hide after selection
+            e.stopPropagation();
+        });
+        colorSelector.appendChild(c);
+    });
+    note.appendChild(colorSelector);
+    
+    document.body.appendChild(note); // append over notebook
+});
+
+// Drag function
+function dragMouseDown(e) {
+    e.preventDefault();
+    const note = e.target.closest(".sticky-note");
+    let pos1 = 0, pos2 = 0, pos3 = e.clientX, pos4 = e.clientY;
+    document.onmousemove = elementDrag;
+    document.onmouseup = closeDragElement;
+
+    function elementDrag(e) {
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        note.style.top = (note.offsetTop - pos2) + "px";
+        note.style.left = (note.offsetLeft - pos1) + "px";
+        note.style.position = "absolute";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
 </script>
 
 </body>
