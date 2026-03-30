@@ -8,17 +8,16 @@
 
 <style>
 /* Body and fonts */
+body {
+    cursor: none !important;
+}
 
-body,
-input,
-textarea,
-button,
-a {
-    cursor: url('QuillCursor-fotor-bg-remover-20260329143216.png') 0 60, auto;
+body, input, textarea, button, a {
+	cursor: none !important;
 }
 
 .entry {
-	caret-color: #2a1408;
+	caret-color: transparent;
 }
 
 body {
@@ -256,10 +255,21 @@ body {
     font-family: 'Cormorant Garamond', serif;
     cursor: inherit;
 }
+
+/* Quill cursor */
+#quill-cursor {
+	position: fixed;
+    width: 60px;
+    height: 60px;
+    pointer-events: none;
+    z-index: 9999;
+}
 </style>
 </head>
 
 <body>
+
+<img src="QuillCursor-fotor-bg-remover-20260329143216.png" id="quill-cursor">
 
 <!-- MUSIC -->
 <audio id="ship-music" loop>
@@ -514,6 +524,21 @@ addBtn.addEventListener("click", () => createNote());
 // Load saved notes
 notes.forEach(n => createNote(n));
 
+// Quill cursor follow
+const quillCursor = document.getElementById("quill-cursor");
+
+document.addEventListener("mousemove", (e) => {
+    quillCursor.style.left = (e.clientX - 4) + "px";
+    quillCursor.style.top = (e.clientY - 55) + "px";
+});
+
+document.addEventListener("mousedown", () => {
+    quillCursor.style.scale = "0.95";
+});
+
+document.addEventListener("mouseup", () => {
+    quillCursor.style.scale = "1";
+});
 </script>
 
 </body>
