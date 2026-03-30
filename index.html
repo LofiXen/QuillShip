@@ -139,6 +139,18 @@ body {
     cursor: pointer;
     font-family: 'Cormorant Garamond', serif;
 }
+	.entry-item {
+    background: #e6d6bd;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.entry-item:hover {
+    background: #d1bfa3;
+}
 
 /* Sticky notes */
 .sticky-note {
@@ -299,14 +311,96 @@ body {
 
 <script>
 // Journal save
+// ==========================
+// ENTRY SYSTEM (HIGH PERFORMANCE)
+// ==========================
+
 const entry = document.querySelector(".entry");
-entry.value = localStorage.getItem("journalEntry") || "";
-entry.style.height = entry.scrollHeight + 'px';
+const sidebar = document.querySelector(".sidebar");
+
+// Store all entries
+let entries = JSON.parse(localStorage.getItem("entries")) || {};
+let currentEntryId = null;
+
+// Create new entry
+function createEntry(title = "Untitled Entry") {
+    const id = "entry_" + Date.now();
+    entries[id] = "";
+
+    saveEntries();
+    renderEntryList();
+    loadEntry(id);
+}
+
+// Save all entries
+function saveEntries() {
+    localStorage.setItem("entries", JSON.stringify(entries));
+}
+
+// Load entry into editor
+function loadEntry(id) {
+    currentEntryId = id;
+    entry.value = entries[id] || "";
+
+    resizeEditor();
+}
+
+// Resize textarea
+function resizeEditor() {
+    entry.style.height = "auto";
+    entry.style.height = entry.scrollHeight + "px";
+}
+
+// Debounced saving (prevents lag)
+let saveTimeout;
 entry.addEventListener("input", () => {
-    entry.style.height = 'auto';
-    entry.style.height = entry.scrollHeight + 'px';
-    localStorage.setItem("journalEntry", entry.value);
+    resizeEditor();
+
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(() => {
+        if (currentEntryId) {
+            entries[currentEntryId] = entry.value;
+            saveEntries();
+        }
+    }, 400);
 });
+
+// Render sidebar list
+function renderEntryList() {
+    // Remove old entry buttons (keep +Add Note)
+    const oldEntries = sidebar.querySelectorAll(".entry-item");
+    oldEntries.forEach(e => e.remove());
+
+    Object.keys(entries).forEach(id => {
+        const btn = document.createElement("button");
+        btn.className = "entry-item";
+
+        // Title = first line or fallback
+        const text = entries[id].split("\n")[0].slice(0, 20) || "New Page";
+        btn.textContent = text;
+
+        btn.addEventListener("click", () => loadEntry(id));
+
+        sidebar.appendChild(btn);
+    });
+}
+
+// Initialize
+if (Object.keys(entries).length === 0) {
+    createEntry("First Entry");
+} else {
+    renderEntryList();
+    loadEntry(Object.keys(entries)[0]);
+}
+
+// Add NEW ENTRY button (top of sidebar)
+const newEntryBtn = document.createElement("button");
+newEntryBtn.textContent = "+ New Page";
+newEntryBtn.style.marginTop = "10px";
+
+newEntryBtn.addEventListener("click", () => createEntry());
+
+sidebar.insertBefore(newEntryBtn, sidebar.children[1]);
 
 // MUSIC (fade-in system)
 const music = document.getElementById("ship-music");
