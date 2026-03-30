@@ -528,9 +528,9 @@ notes.forEach(n => createNote(n));
 const quillCursor = document.getElementById("quill-cursor");
 
 document.addEventListener("mousemove", (e) => {
-    quillCursor.style.transform =
-        `translate(${e.clientX}px, ${e.clientY}px) translate(-8px, +35px)`;
-})
+    quillCursor.style.left = e.clientX + "px";
+    quillCursor.style.top = e.clientY + "px";
+});
 
 document.addEventListener("mousedown", () => {
     quillCursor.style.scale = "0.95";
