@@ -533,10 +533,11 @@ document.addEventListener("mousemove", (e) => {
 });
 
 document.addEventListener("mousedown", () => {
-    quillCursor.style.transform += " scale(0.95)";
+    quillCursor.style.scale = "0.95";
 });
+
 document.addEventListener("mouseup", () => {
-    quillCursor.style.transform = quillCursor.style.transform.replace(" scale(0.95)", "");
+    quillCursor.style.scale = "1";
 });
 </script>
 
