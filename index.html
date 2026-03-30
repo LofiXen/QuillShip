@@ -263,6 +263,8 @@ body {
     height: 60px;
     pointer-events: none;
     z-index: 9999;
+
+	transform: translate(-6px, -52px);
 }
 </style>
 </head>
@@ -528,8 +530,8 @@ notes.forEach(n => createNote(n));
 const quillCursor = document.getElementById("quill-cursor");
 
 document.addEventListener("mousemove", (e) => {
-    quillCursor.style.left = (e.clientX - 8) + "px";
-    quillCursor.style.top = (e.clientY + 100) + "px";
+    quillCursor.style.left = e.clientX + "px";
+    quillCursor.style.top = e.clientY + "px";
 });
 
 document.addEventListener("mousedown", () => {
