@@ -529,7 +529,7 @@ const quillCursor = document.getElementById("quill-cursor");
 
 document.addEventListener("mousemove", (e) => {
     quillCursor.style.left = (e.clientX - 8) + "px";
-    quillCursor.style.top = (e.clientY - 25) + "px";
+    quillCursor.style.top = (e.clientY + 100) + "px";
 });
 
 document.addEventListener("mousedown", () => {
