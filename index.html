@@ -7,11 +7,84 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Inter&display=swap" rel="stylesheet">
 
 <style>
-/* ======================
-   Body & Global Styles
-   ====================== */
-body, input, textarea, button, a {
+
+/* Burn modal overlay */
+#burn-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(30, 20, 10, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9998;
+}
+
+.burn-hidden {
+    display: none !important;
+}
+
+/* Burn box */
+.burn-box {
+    width: 360px;
+    padding: 25px;
+    background: #f2e0c7;
+    border: 2px solid #a68b6b;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+}
+
+/* Subtle grain */
+.burn-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.05);
+    opacity: 0.08;
+    pointer-events: none;
+}
+
+/* Text */
+.burn-text {
+    font-size: 18px;
+    color: #3a2a1a;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.burn-actions button {
+    margin: 0 8px;
+    padding: 6px 14px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+#burn-confirm {
+    background: #8c3b2e;
+    color: #f5e6d3;
+}
+
+#burn-cancel {
+    background: #b8a17a;
+}
+
+/* Body and fonts */
+body {
     cursor: none !important;
+}
+
+body, input, textarea, button, a {
+	cursor: none !important;
+}
+
+#burn-modal, #burn-modal * {
+    pointer-events: auto;
+    cursor: pointer !important;
+}
+
+.entry {
+	caret-color: #2a1408;
 }
 
 body {
@@ -21,22 +94,14 @@ body {
     overflow-x: hidden;
 }
 
-/* ======================
-   Notebook Layout
-   ====================== */
+/* Frame containing notebook */
 .frame {
     position: relative;
     width: 740px;
     margin: 60px auto;
 }
 
-.notebook-with-sidebar {
-    display: flex;
-    max-width: 1000px;
-    margin: 40px auto;
-    position: relative;
-}
-
+/* Notebook */
 .notebook {
     width: 700px;
     margin: 0 auto;
@@ -47,15 +112,12 @@ body {
     z-index: 1;
 }
 
-/* ======================
-   Titles
-   ====================== */
+/* Titles */
 .title {
     font-size: 32px;
     color: #5a4330;
     margin: 0 40px 10px;
 }
-
 .subtitle {
     font-size: 13px;
     color: #9c8570;
@@ -64,26 +126,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-.entry-title {
-    width: calc(100% - 100px);
-    margin: 0 50px 10px;
-    font-size: 22px;
-    border: none;
-    background: transparent;
-    font-family: 'Cormorant Garamond', serif;
-    color: #3e2a1f;
-    outline: none;
-    border-bottom: 1px solid rgba(90,60,30,0.3);
-}
-
-.entry-title::placeholder {
-    color: rgba(70,50,30,0.4);
-    font-style: italic;
-}
-
-/* ======================
-   Writing Area
-   ====================== */
+/* Writing area */
 .entry {
     position: relative;
     z-index: 1;
@@ -107,12 +150,13 @@ body {
     overflow: hidden;
 }
 
+/* Placeholder styling */
 .entry::placeholder {
     color: rgba(70, 50, 30, 0.45);
     font-style: italic;
 }
 
-/* Parchment tint & grain */
+/* Parchment tint and grain */
 .entry::before {
     content: "";
     position: absolute;
@@ -132,9 +176,15 @@ body {
     z-index: -1;
 }
 
-/* ======================
-   Sidebar
-   ====================== */
+/* Layout */
+.notebook-with-sidebar {
+    display: flex;
+    max-width: 1000px;
+    margin: 40px auto;
+    position: relative;
+}
+
+/* Sidebar */
 .sidebar {
     width: 200px;
     min-width: 200px;
@@ -150,29 +200,14 @@ body {
 }
 
 #add-note {
-    background: #2f4f3f; /* forest green */
+    background: #d1bfa3;
     border: none;
     padding: 6px 10px;
     cursor: pointer;
-    color: #f2e9dc;
     font-family: 'Cormorant Garamond', serif;
 }
 
-.entry-item {
-    background: #e6d6bd;
-    border: none;
-    padding: 6px;
-    cursor: pointer;
-    text-align: left;
-    font-family: 'Cormorant Garamond', serif;
-}
-.entry-item:hover {
-    background: #d1bfa3;
-}
-
-/* ======================
-   Sticky Notes
-   ====================== */
+/* Sticky notes */
 .sticky-note {
     position: absolute;
     min-width: 150px;
@@ -187,6 +222,7 @@ body {
     font-family: 'Cormorant Garamond', serif;
 }
 
+/* Header for drag & buttons */
 .note-header {
     display: flex;
     justify-content: space-between;
@@ -219,13 +255,13 @@ body {
     font-size: 12px;
 }
 
+/* Color selector */
 .sticky-colors {
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
     margin-top: 4px;
 }
-
 .color-option {
     width: 20px;
     height: 20px;
@@ -234,6 +270,7 @@ body {
     border: 1px solid #555;
 }
 
+/* Sticky dock */
 .sticky-dock {
     position: fixed;
     bottom: 0;
@@ -256,6 +293,60 @@ body {
     font-size: 12px;
 }
 
+/* Colors */
+.color-1 { background:#c8a16d; }
+.color-2 { background:#e2cba9; }
+.color-3 { background:#b5c99a; }
+.color-4 { background:#a36e4c; }
+.color-5 { background:#f0d8c0; }
+.color-6 { background:#d9b48f; }
+.color-7 { background:#8c6b4f; }
+.color-8 { background:#d0a67b; }
+.color-9 { background:#9a7d63; }
+.color-10 { background:#c0b283; }
+.color-11 { background:#b8a17a; }
+.color-12 { background:#726255; }
+.color-13 { background:#6e584f; }
+.color-14 { background:#b3a18a; }
+.color-15 { background:#d2c1a3; }
+
+#add-chapter {
+    background: #b89a72;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+#chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.chapter {
+    background: #e6d3b3;
+    padding: 6px;
+    border: 1px solid #c2a98a;
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chapter-title {
+    flex: 1;
+    outline: none;
+}
+
+.chapter-delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 /* Music button */
 #music-toggle {
     position: fixed;
@@ -271,14 +362,28 @@ body {
 
 /* Quill cursor */
 #quill-cursor {
-    position: fixed;
+	position: fixed;
     width: 60px;
     height: 60px;
     pointer-events: none;
     z-index: 9999;
 }
+
+#quill-cursor {
+    pointer-events: none;
+}
 </style>
 </head>
+
+<div id="burn-modal" class="burn-hidden">
+    <div class="burn-box">
+        <div id="burn-text" class="burn-text"></div>
+        <div class="burn-actions">
+            <button id="burn-confirm">Burn</button>
+            <button id="burn-cancel">Keep</button>
+        </div>
+    </div>
+</div>
 
 <body>
 
@@ -293,6 +398,8 @@ body {
 <div class="notebook-with-sidebar">
     <div class="sidebar">
         <button id="add-note">+ Add Note</button>
+        <button id="add-chapter">+ New Chapter</button>
+<div id="chapters"></div>
     </div>
 
     <div class="main-notebook">
@@ -300,138 +407,470 @@ body {
             <div class="notebook">
                 <div class="title">QuillShip</div>
                 <div class="subtitle">Flick your quill and calm your mind.</div>
-
-                <!-- NEW TITLE INPUT -->
-                <input class="entry-title" placeholder="Untitled Page..." />
-
-                <!-- TEXTAREA -->
-                <textarea class="entry" placeholder="The ink won’t write itself..."></textarea>
+                <textarea class="entry" placeholder="The ink won’t write itself...">
+                </textarea>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Sticky Dock -->
 <div class="sticky-dock"></div>
 
 <script>
-// ======================
-// Journal System
-// ======================
-const titleInput = document.querySelector(".entry-title");
+// Journal save
 const entry = document.querySelector(".entry");
-const sidebar = document.querySelector(".sidebar");
-
-// Store entries
-let entries = JSON.parse(localStorage.getItem("entries")) || {};
-let currentEntryId = null;
-
-// CREATE NEW ENTRY
-function createEntry(title = "Untitled Page") {
-    const id = "entry_" + Date.now();
-    entries[id] = { title, content: "" };
-    saveEntries();
-    renderEntryList();
-    loadEntry(id);
-}
-
-// SAVE
-function saveEntries() {
-    localStorage.setItem("entries", JSON.stringify(entries));
-}
-
-// LOAD
-function loadEntry(id) {
-    currentEntryId = id;
-    entry.value = entries[id].content || "";
-    titleInput.value = entries[id].title || "";
-    resizeEditor();
-}
-
-// RESIZE
-function resizeEditor() {
-    entry.style.height = "auto";
-    entry.style.height = entry.scrollHeight + "px";
-}
-
-// DEBOUNCED SAVE
-let saveTimeout;
+entry.style.height = entry.scrollHeight + 'px';
 entry.addEventListener("input", () => {
-    resizeEditor();
-    clearTimeout(saveTimeout);
-    saveTimeout = setTimeout(() => {
-        if (currentEntryId) {
-            entries[currentEntryId].content = entry.value;
-            entries[currentEntryId].title = titleInput.value;
-            saveEntries();
-            renderEntryList();
-        }
-    }, 400);
+    entry.style.height = 'auto';
+    entry.style.height = entry.scrollHeight + 'px';
 });
 
-titleInput.addEventListener("input", () => {
-    if (currentEntryId) {
-        entries[currentEntryId].title = titleInput.value;
-        saveEntries();
-        renderEntryList();
+// MUSIC (fade-in system)
+const music = document.getElementById("ship-music");
+const toggleBtn = document.getElementById("music-toggle");
+
+let hasStarted = false;
+
+function fadeIn(audio) {
+    let vol = 0;
+    audio.volume = 0;
+    audio.muted = false;
+
+    const interval = setInterval(() => {
+        if (vol < 0.3) {
+            vol += 0.01;
+            audio.volume = vol;
+        } else {
+            clearInterval(interval);
+        }
+    }, 200);
+}
+
+// Start music on FIRST interaction
+document.addEventListener("click", () => {
+    if (!hasStarted) {
+        music.play();
+        fadeIn(music);
+        hasStarted = true;
     }
 });
 
-// RENDER SIDEBAR
-function renderEntryList() {
-    const oldEntries = sidebar.querySelectorAll(".entry-item");
-    oldEntries.forEach(e => e.remove());
+// Toggle button
+toggleBtn.addEventListener("click", () => {
+    if (music.paused) {
+        music.play();
+        toggleBtn.textContent = "🔊";
+    } else {
+        music.pause();
+        toggleBtn.textContent = "🔇";
+    }
+});
 
-    Object.keys(entries).forEach(id => {
-        const btn = document.createElement("button");
-        btn.className = "entry-item";
-        btn.textContent = entries[id].title || "Untitled Page";
-        btn.addEventListener("click", () => loadEntry(id));
-        sidebar.appendChild(btn);
+// Sticky notes full-featured
+const addBtn = document.getElementById("add-note");
+const dock = document.querySelector(".sticky-dock");
+let notes = JSON.parse(localStorage.getItem("stickyNotes")) || [];
+
+// Save notes
+function saveNotes() {
+    notes = [];
+    document.querySelectorAll(".sticky-note").forEach(note => {
+        notes.push({
+            id: note.dataset.id,
+            title: note.querySelector(".note-title").innerText,
+            body: note.querySelector(".note-body").innerText,
+            color: note.dataset.color,
+            top: note.style.top,
+            left: note.style.left,
+            width: note.style.width,
+            height: note.style.height,
+            minimized: note.dataset.minimized === "true"
+        });
+    });
+    localStorage.setItem("stickyNotes", JSON.stringify(notes));
+}
+
+// Create note
+function createNote(data = {}) {
+    const note = document.createElement("div");
+    note.className = "sticky-note";
+    note.dataset.id = data.id || Date.now().toString();
+    note.dataset.color = data.color || "color-1";
+    note.dataset.minimized = data.minimized || false;
+    note.style.top = data.top || "50px";
+    note.style.left = data.left || "220px";
+    note.style.width = data.width || "200px";
+    note.style.height = data.height || "150px";
+    note.classList.add(note.dataset.color);
+
+    // Header
+    const header = document.createElement("div");
+    header.className = "note-header";
+
+    const title = document.createElement("div");
+    title.className = "note-title";
+    title.contentEditable = true;
+    title.innerText = data.title || "New Note";
+
+    const minimizeBtn = document.createElement("button");
+    minimizeBtn.className = "minimize-note";
+    minimizeBtn.innerText = "_";
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "delete-note";
+    deleteBtn.innerText = "X";
+
+    header.appendChild(title);
+    header.appendChild(minimizeBtn);
+    header.appendChild(deleteBtn);
+
+    // Body
+    const body = document.createElement("div");
+    body.className = "note-body";
+    body.contentEditable = true;
+    body.innerText = data.body || "Don't waste your schedulae..."; // placeholder text
+    body.style.color = data.body ? "#000" : "rgba(0,0,0,0.45)";
+
+    // Placeholder behavior
+    body.addEventListener("focus", () => {
+        if (body.innerText === "Don't waste your schedulae...") {
+            body.innerText = "";
+            body.style.color = "#000";
+        }
+    });
+    body.addEventListener("blur", () => {
+        if (body.innerText.trim() === "") {
+            body.innerText = "Don't waste your schedulae...";
+            body.style.color = "rgba(0,0,0,0.45)";
+        }
+    });
+
+    // Color selector
+    const colorSelector = document.createElement("div");
+    colorSelector.className = "sticky-colors";
+    const colors = ['color-1','color-2','color-3','color-4','color-5',
+                    'color-6','color-7','color-8','color-9','color-10',
+                    'color-11','color-12','color-13','color-14','color-15'];
+    colors.forEach(c => {
+        const swatch = document.createElement("div");
+        swatch.className = `color-option ${c}`;
+        swatch.addEventListener("click", e => {
+            note.classList.remove(note.dataset.color);
+            note.classList.add(c);
+            note.dataset.color = c;
+            colorSelector.style.display = "none"; // hide after selection
+            saveNotes();
+            e.stopPropagation();
+        });
+        colorSelector.appendChild(swatch);
+    });
+
+    note.appendChild(header);
+    note.appendChild(body);
+    note.appendChild(colorSelector);
+
+    document.body.appendChild(note);
+
+    // Minimize
+    minimizeBtn.addEventListener("click", () => {
+        note.dataset.minimized = "true";
+        note.style.display = "none";
+        addDockTab(note);
+        saveNotes();
+    });
+
+    // Delete
+    deleteBtn.addEventListener("click", () => {
+        note.remove();
+        removeDockTab(note.dataset.id);
+        saveNotes();
+    });
+
+    // Dragging
+    let offsetX, offsetY;
+    header.addEventListener("mousedown", e => {
+        offsetX = e.clientX - note.offsetLeft;
+        offsetY = e.clientY - note.offsetTop;
+
+        function move(e) {
+            note.style.left = (e.clientX - offsetX) + "px";
+            note.style.top = (e.clientY - offsetY) + "px";
+        }
+        document.addEventListener("mousemove", move);
+        document.addEventListener("mouseup", () => {
+            document.removeEventListener("mousemove", move);
+            saveNotes();
+        }, { once: true });
+    });
+
+    if (!note.dataset.minimized || note.dataset.minimized === "false") {
+        note.style.display = "block";
+    } else {
+        note.style.display = "none";
+        addDockTab(note);
+    }
+
+    saveNotes();
+}
+
+// Dock tab
+function addDockTab(note) {
+    let tab = document.createElement("div");
+    tab.className = "dock-tab";
+    tab.dataset.id = note.dataset.id;
+    tab.innerText = note.querySelector(".note-title").innerText;
+
+    tab.addEventListener("click", () => {
+        note.style.display = "block";
+        note.dataset.minimized = "false";
+        tab.remove();
+        saveNotes();
+    });
+
+    dock.appendChild(tab);
+}
+
+function removeDockTab(id) {
+    const tab = dock.querySelector(`.dock-tab[data-id="${id}"]`);
+    if (tab) tab.remove();
+}
+
+// Add button
+addBtn.addEventListener("click", () => createNote());
+
+// Load saved notes
+notes.forEach(n => createNote(n));
+
+const chapterBtn = document.getElementById("add-chapter");
+const chapterContainer = document.getElementById("chapters");
+
+let chapters = JSON.parse(localStorage.getItem("chapters")) || [];
+let currentChapterId = localStorage.getItem("currentChapter") || null;
+
+// Save chapters
+function saveChapters() {
+    localStorage.setItem("chapters", JSON.stringify(chapters));
+}
+
+// Load into editor
+function loadChapter(id) {
+    const chapter = chapters.find(c => c.id === id);
+    if (!chapter) return;
+
+    // Load content
+    entry.value = chapter.content || "";
+    entry.style.height = 'auto';
+    entry.style.height = entry.scrollHeight + 'px';
+
+
+    currentChapterId = id;
+    localStorage.setItem("currentChapter", id);
+}
+
+// Auto-save writing INTO current chapter
+entry.addEventListener("input", () => {
+    if (!currentChapterId) return;
+
+    const chapter = chapters.find(c => c.id === currentChapterId);
+    if (chapter) {
+        chapter.content = entry.value;
+        saveChapters();
+    }
+});
+
+// Create chapter
+function createChapter(data = {}) {
+    const id = data.id || Date.now().toString();
+
+    const chapter = {
+        id: id,
+        title: data.title || "Untitled Chapter",
+        content: data.content || ""
+    };
+
+    chapters.push(chapter);
+    saveChapters();
+
+    renderChapters();
+    loadChapter(id);
+}
+
+// Render chapters
+function renderChapters() {
+    chapterContainer.innerHTML = "";
+
+    chapters.forEach(ch => {
+        const div = document.createElement("div");
+        div.className = "chapter";
+        div.draggable = true;
+        div.dataset.id = ch.id;
+
+        const title = document.createElement("div");
+        title.className = "chapter-title";
+        title.contentEditable = true;
+        title.innerText = ch.title;
+
+        title.addEventListener("input", () => {
+    ch.title = title.innerText;
+
+    saveChapters();
+});
+
+        const del = document.createElement("button");
+        del.className = "chapter-delete";
+        del.innerText = "X";
+
+        // 🔥 Two-step burn system
+        const burnModal = document.getElementById("burn-modal");
+const burnText = document.getElementById("burn-text");
+const burnConfirm = document.getElementById("burn-confirm");
+const burnCancel = document.getElementById("burn-cancel");
+
+let burnStage = 0;
+let targetChapterId = null;
+
+del.addEventListener("click", () => {
+    burnStage = 1;
+    targetChapterId = ch.id;
+
+    burnText.innerText = "Are you sure you want to burn this scroll?";
+    burnModal.classList.remove("burn-hidden");
+});
+
+// Cancel
+burnCancel.addEventListener("click", () => {
+    burnModal.classList.add("burn-hidden");
+    burnStage = 0;
+    targetChapterId = null;
+});
+
+// Confirm (2-step)
+burnConfirm.addEventListener("click", () => {
+    if (burnStage === 1) {
+        burnStage = 2;
+        burnText.innerText = "The remnants of this scroll cannot be retrieved from the ashes. It is unrecoverable.";
+        return;
+    }
+
+    if (burnStage === 2 && targetChapterId) {
+        chapters = chapters.filter(c => c.id !== targetChapterId);
+        saveChapters();
+        renderChapters();
+
+        if (currentChapterId === targetChapterId) {
+            entry.value = "";
+            currentChapterId = null;
+        }
+
+        burnModal.classList.add("burn-hidden");
+        burnStage = 0;
+        targetChapterId = null;
+        }
+            saveChapters();
+            renderChapters();
+
+            if (currentChapterId === ch.id) {
+                entry.value = "";
+                currentChapterId = null;
+            }
+        });
+
+        // Click to load
+        div.addEventListener("click", () => loadChapter(ch.id));
+
+        // Dragging reorder
+        div.addEventListener("dragstart", () => {
+            div.classList.add("dragging");
+        });
+
+        div.addEventListener("dragend", () => {
+            div.classList.remove("dragging");
+
+            const newOrder = [];
+            document.querySelectorAll(".chapter").forEach(el => {
+                const id = el.dataset.id;
+                const found = chapters.find(c => c.id === id);
+                if (found) newOrder.push(found);
+            });
+
+            chapters = newOrder;
+            saveChapters();
+        });
+
+        chapterContainer.addEventListener("dragover", e => {
+            e.preventDefault();
+            const dragging = document.querySelector(".dragging");
+            const after = getDragAfterElement(e.clientY);
+
+            if (after == null) {
+                chapterContainer.appendChild(dragging);
+            } else {
+                chapterContainer.insertBefore(dragging, after);
+            }
+        });
+
+        div.appendChild(title);
+        div.appendChild(del);
+        chapterContainer.appendChild(div);
     });
 }
 
-// INITIALIZE
-if (Object.keys(entries).length === 0) createEntry("First Entry");
-else {
-    renderEntryList();
-    loadEntry(Object.keys(entries)[0]);
+// Drag helper
+function getDragAfterElement(y) {
+    const elements = [...chapterContainer.querySelectorAll(".chapter:not(.dragging)")];
+
+    return elements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
-// NEW PAGE BUTTON
-const newEntryBtn = document.createElement("button");
-newEntryBtn.textContent = "+ New Page";
-newEntryBtn.style.background = "#2f4f3f"; // forest green
-newEntryBtn.style.color = "#f2e9dc";
-newEntryBtn.style.border = "none";
-newEntryBtn.style.padding = "6px";
-newEntryBtn.style.marginTop = "10px";
-newEntryBtn.style.cursor = "pointer";
-sidebar.insertBefore(newEntryBtn, sidebar.children[0]);
-newEntryBtn.addEventListener("click", () => createEntry());
+// Add chapter button
+chapterBtn.addEventListener("click", () => createChapter());
 
-// ======================
-// Music system
-// ======================
-const music = document.getElementById("ship-music");
-const toggleBtn = document.getElementById("music-toggle");
-let hasStarted = false;
-function fadeIn(audio) {
-    let vol = 0; audio.volume = 0; audio.muted = false;
-    const interval = setInterval(() => {
-        if (vol < 0.3) { vol += 0.01; audio.volume = vol; } 
-        else clearInterval(interval);
-    }, 200);
+// Load existing
+renderChapters();
+
+// Load last opened
+if (currentChapterId) {
+    loadChapter(currentChapterId);
 }
-document.addEventListener("click", () => { if (!hasStarted) { music.play(); fadeIn(music); hasStarted = true; } });
-toggleBtn.addEventListener("click", () => {
-    if (music.paused) { music.play(); toggleBtn.textContent = "🔊"; } 
-    else { music.pause(); toggleBtn.textContent = "🔇"; }
+
+document.querySelectorAll(".dock-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        const chapterId = tab.dataset.id; // Each tab has its unique ID
+
+        // Optional: switch main entry text per chapter
+        const savedText = localStorage.getItem("entry-" + chapterId);
+        entry.value = savedText || "";
+        entry.style.height = 'auto';
+        entry.style.height = entry.scrollHeight + 'px';
+    });
+
 });
 
-// ======================
-// Sticky Notes System
-// ======================
-// [existing code unchanged]
+// Quill cursor follow
+const quillCursor = document.getElementById("quill-cursor");
+
+document.addEventListener("mousemove", (e) => {
+    quillCursor.style.left = (e.clientX - 4) + "px";
+    quillCursor.style.top = (e.clientY - 55) + "px";
+});
+
+document.addEventListener("mousedown", () => {
+    quillCursor.style.scale = "0.95";
+});
+
+document.addEventListener("mouseup", () => {
+    quillCursor.style.scale = "1";
+});
 </script>
 
 </body>
