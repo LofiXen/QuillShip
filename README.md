@@ -1,5 +1,5 @@
 # QuillShip
-A calm, aesthetic digital notebook with customizable layouts and interactive elements.
+A calm, vintage, aesthetic digital notebook with interactive elements.
 # Quiet Notebook
 
 A soft, customizable digital journal.
