@@ -36,12 +36,13 @@
 
         <!-- EXPORT / IMPORT (NOW INSIDE SIDEBAR) -->
         <div class="export-import">
-            <button id="export-txt">Export TXT</button>
-            <button id="export-json">Export JSON</button>
-            <button id="export-pdf">Export PDF</button>
-            <button id="export-doc">Export DOC</button>
+            <button onclick="exportData('json')">Export JSON</button>
+    <button onclick="exportData('txt')">Export TXT</button>
+    <button onclick="exportData('doc')">Export DOC</button>
+    <button onclick="exportData('pdf')">Export PDF</button>
 
-            <input type="file" id="import-file" accept=".json,.txt">
+<input type="file" id="importFile" style="display:none" onchange="importData(this.files[0])">
+<button onclick="document.getElementById('importFile').click()">Import</button>
         </div>
     </div>
 
