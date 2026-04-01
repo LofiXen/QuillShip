@@ -397,3 +397,80 @@ document.addEventListener("mousedown", () => {
 document.addEventListener("mouseup", () => {
     quillCursor.style.scale = "1";
 });
+
+// =========================
+// EXPORT SYSTEM
+// =========================
+function exportData(type) {
+    const data = {
+        chapters: chapters,
+        notes: notes
+    };
+
+    if (type === "json") {
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        downloadFile(blob, "quillship_backup.json");
+    }
+
+    if (type === "txt") {
+        let text = "";
+        chapters.forEach(ch => {
+            text += `=== ${ch.title} ===\n${ch.content}\n\n`;
+        });
+        const blob = new Blob([text], { type: "text/plain" });
+        downloadFile(blob, "quillship.txt");
+    }
+
+    if (type === "doc") {
+        let html = "<html><body>";
+        chapters.forEach(ch => {
+            html += `<h1>${ch.title}</h1><p>${ch.content.replace(/\n/g, "<br>")}</p>`;
+        });
+        html += "</body></html>";
+
+        const blob = new Blob([html], { type: "application/msword" });
+        downloadFile(blob, "quillship.doc");
+    }
+
+    if (type === "pdf") {
+        window.print(); // simple print-to-PDF
+    }
+}
+
+// Download helper
+function downloadFile(blob, filename) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+}
+
+
+// =========================
+// IMPORT SYSTEM
+// =========================
+function importData(file) {
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+
+            if (data.chapters) {
+                chapters = data.chapters;
+                saveChapters();
+                renderChapters();
+            }
+
+            if (data.notes) {
+                localStorage.setItem("stickyNotes", JSON.stringify(data.notes));
+                location.reload(); // refresh to rebuild notes
+            }
+
+        } catch {
+            alert("Invalid file. Use a QuillShip JSON backup.");
+        }
+    };
+
+    reader.readAsText(file);
+}
