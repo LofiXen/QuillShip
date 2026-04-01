@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>QuillShip</title>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Inter&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
 </head>
@@ -29,23 +29,32 @@
     <button id="music-toggle">🔊</button>
 
     <div class="notebook-with-sidebar">
-        <div class="sidebar">
-            <button id="add-note">+ Add Note</button>
-            <button id="add-chapter">+ New Chapter</button>
-            <div id="chapters"></div>
-        </div>
+    <div class="sidebar">
+        <button id="add-note">+ Add Note</button>
+        <button id="add-chapter">+ New Chapter</button>
+        <div id="chapters"></div>
 
-        <div class="main-notebook">
-            <div class="frame">
-                <div class="notebook">
-                    <div class="title">QuillShip</div>
-                    <div class="subtitle">Flick your quill and calm your mind.</div>
-                    <textarea class="entry" placeholder="The ink won’t write itself..."></textarea>
-                </div>
-            </div>
+        <!-- EXPORT / IMPORT (NOW INSIDE SIDEBAR) -->
+        <div class="export-import">
+            <button id="export-txt">Export TXT</button>
+            <button id="export-json">Export JSON</button>
+            <button id="export-pdf">Export PDF</button>
+            <button id="export-doc">Export DOC</button>
+
+            <input type="file" id="import-file" accept=".json,.txt">
         </div>
     </div>
 
+    <div class="main-notebook">
+        <div class="frame">
+            <div class="notebook">
+                <div class="title">QuillShip</div>
+                <div class="subtitle">Flick your quill and calm your mind.</div>
+                <textarea class="entry" placeholder="The ink won’t write itself..."></textarea>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Sticky Dock -->
     <div class="sticky-dock"></div>
 
