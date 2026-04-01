@@ -89,7 +89,7 @@ body, input, textarea, button, a {
     background: url('https://i.imgur.com/vKA1DiL.png') repeat-y;
     background-size: 100% auto;
     background-position: top center;
-    color: #2a1408;
+    color: #967257;
     text-shadow: 0.3px 0.3px 0 #1a0d05, 0.5px 0.5px 0 rgba(0,0,0,0.2);
     font-family: 'Cormorant Garamond', serif;
     line-height: 1.6;
@@ -146,12 +146,12 @@ body, input, textarea, button, a {
 /* Titles */
 .title {
     font-size: 32px;
-    color: #5a4330;
+    color: #5d542b;
     margin: 0 40px 10px;
 }
 .subtitle {
     font-size: 13px;
-    color: #9c8570;
+    color: #bba88d;
     margin: 0 40px 25px;
     font-style: italic;
     letter-spacing: 0.5px;
@@ -275,21 +275,21 @@ body, input, textarea, button, a {
 }
 
 /* Colors */
-.color-1 { background:#c8a16d; }
-.color-2 { background:#e2cba9; }
-.color-3 { background:#b5c99a; }
-.color-4 { background:#a36e4c; }
-.color-5 { background:#f0d8c0; }
-.color-6 { background:#d9b48f; }
-.color-7 { background:#8c6b4f; }
-.color-8 { background:#d0a67b; }
-.color-9 { background:#9a7d63; }
-.color-10 { background:#c0b283; }
-.color-11 { background:#b8a17a; }
-.color-12 { background:#726255; }
-.color-13 { background:#6e584f; }
-.color-14 { background:#b3a18a; }
-.color-15 { background:#d2c1a3; }
+.color-1 { background:#2f3a2a; }
+.color-2 { background:#566b3a; }
+.color-3 { background:#9b8a55; }
+.color-4 { background:#d2b673; }
+.color-5 { background:#f1e1ba; }
+.color-6 { background:#a0d4c1; }
+.color-7 { background:#b59a76; }
+.color-8 { background:#8b6a4a; }
+.color-9 { background:#5c4736; }
+.color-10 { background:#26241f; }
+.color-11 { background:#bfa081; }
+.color-12 { background:#d3b392; }
+.color-13 { background:#e7c6a2; }
+.color-14 { background:#df9675; }
+.color-15 { background:#966548; }
 
 /* Chapters */
 #chapters {
