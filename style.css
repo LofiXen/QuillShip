@@ -339,3 +339,22 @@ body, input, textarea, button, a {
     pointer-events: none;
     z-index: 9999;
 }
+
+.export-import {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.export-import button {
+    background: #d1bfa3;
+    border: none;
+    padding: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    cursor: pointer;
+}
+
+#import-file {
+    margin-top: 5px;
+}
