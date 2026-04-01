@@ -402,42 +402,59 @@ document.addEventListener("mouseup", () => {
 // EXPORT SYSTEM
 // =========================
 function exportData(type) {
-    const data = {
-        chapters: chapters,
-        notes: notes
-    };
+    const text = entry.value;
+    const currentChapter = chapters.find(c => c.id === currentChapterId);
+    const title = currentChapter ? currentChapter.title : "Untitled";
 
-    if (type === "json") {
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-        downloadFile(blob, "quillship_backup.json");
+    if (!text.trim()) {
+        alert("Nothing to export.");
+        return;
     }
 
     if (type === "txt") {
-        let text = "";
-        chapters.forEach(ch => {
-            text += `=== ${ch.title} ===\n${ch.content}\n\n`;
-        });
-        const blob = new Blob([text], { type: "text/plain" });
-        downloadFile(blob, "quillship.txt");
+        const content = `${title}\n\n${text}`;
+        const blob = new Blob([content], { type: "text/plain" });
+        downloadFile(blob, `${title}.txt`);
     }
 
     if (type === "doc") {
-        let html = "<html><body>";
-        chapters.forEach(ch => {
-            html += `<h1>${ch.title}</h1><p>${ch.content.replace(/\n/g, "<br>")}</p>`;
-        });
-        html += "</body></html>";
-
+        const html = `
+        <html>
+        <body>
+            <h1>${title}</h1>
+            <p>${text.replace(/\n/g, "<br>")}</p>
+        </body>
+        </html>`;
         const blob = new Blob([html], { type: "application/msword" });
-        downloadFile(blob, "quillship.doc");
+        downloadFile(blob, `${title}.doc`);
+    }
+
+    if (type === "json") {
+        const data = {
+            title: title,
+            content: text
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        downloadFile(blob, `${title}.json`);
     }
 
     if (type === "pdf") {
-        window.print(); // simple print-to-PDF
+        const printWindow = window.open("", "_blank");
+        printWindow.document.write(`
+            <html>
+            <head><title>${title}</title></head>
+            <body style="font-family: serif; padding: 40px;">
+                <h1>${title}</h1>
+                <p>${text.replace(/\n/g, "<br>")}</p>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.print();
     }
 }
 
-// Download helper
+// helper
 function downloadFile(blob, filename) {
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
