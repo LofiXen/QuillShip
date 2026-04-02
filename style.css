@@ -177,8 +177,9 @@ body, input, textarea, button, a {
 	width: 200px; 
 	min-width: 200px; 
     background-image: url('https://i.imgur.com/0smEs5s.jpeg');
-	background-size: cover;
+	background-size: 100% auto;
 	background-position: center;
+	background-repeat: repeat-y;
     padding: 10px; 
     display: flex; 
     flex-direction: column; 
