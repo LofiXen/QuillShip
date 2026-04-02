@@ -173,21 +173,19 @@ body, input, textarea, button, a {
 }
 
 /* Sidebar */ 
-.sidebar { 
-    width: 200px; 
-    min-width: 200px; 
-
+.sidebar {
+    width: 200px;
+    min-width: 200px;
     background-image: url('Gemini_Generated_Image_rokbxprokbxprokb-fotor-bg-remover-20260402133720.png');
-    background-size: cover;
-    background-position: center;
     background-repeat: no-repeat;
-
+    background-size: contain;
+    background-position: top center;
     padding: 10px; 
     display: flex; 
     flex-direction: column; 
     gap: 10px; 
     border-right: 2px solid #d1bfa3; 
-    overflow-y: auto; 
+    overflow: visible; /* let it grow with content */
     position: relative; 
     z-index: 2; 
 }
