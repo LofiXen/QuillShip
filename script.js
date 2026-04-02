@@ -61,7 +61,6 @@ function saveNotes() {
             title: note.querySelector(".note-title").innerText,
             body: note.querySelector(".note-body").innerText,
             color: note.dataset.color,
-            texture: note.dataset.texture || null,
             top: note.style.top,
             left: note.style.left,
             width: note.style.width,
@@ -78,17 +77,12 @@ function createNote(data = {}) {
     note.className = "sticky-note";
     note.dataset.id = data.id || Date.now().toString();
     note.dataset.color = data.color || "color-1";
-    note.dataset.texture = data.texture || "";
     note.dataset.minimized = data.minimized || false;
     note.style.top = data.top || "50px";
     note.style.left = data.left || "220px";
     note.style.width = data.width || "200px";
     note.style.height = data.height || "150px";
     note.classList.add(note.dataset.color);
-    if (data.texture) {
-    note.classList.add(data.texture);
-    note.dataset.texture = data.texture;
-}
 
     // Header
     const header = document.createElement("div");
@@ -129,8 +123,11 @@ function createNote(data = {}) {
             body.innerText = "Don't waste your schedulae...";
             body.style.color = "rgba(0,0,0,0.45)";
         }
-    
-});
+    });
+
+    // Color selector
+    const colorSelector = document.createElement("div");
+    colorSelector.className = "sticky-colors";
     const colors = ['color-1','color-2','color-3','color-4','color-5',
                     'color-6','color-7','color-8','color-9','color-10',
                     'color-11','color-12','color-13','color-14','color-15'];
@@ -138,20 +135,19 @@ function createNote(data = {}) {
         const swatch = document.createElement("div");
         swatch.className = `color-option ${c}`;
         swatch.addEventListener("click", e => {
-    note.dataset.texture = "";
-    // apply new color
-    note.classList.add(c);
-    note.dataset.color = c;
-    saveNotes();
-    e.stopPropagation();
-});
+            note.classList.remove(note.dataset.color);
+            note.classList.add(c);
+            note.dataset.color = c;
+            colorSelector.style.display = "none";
+            saveNotes();
+            e.stopPropagation();
+        });
         colorSelector.appendChild(swatch);
     });
 
     note.appendChild(header);
     note.appendChild(body);
     note.appendChild(colorSelector);
-    note.appendChild(textureSelector);
     document.body.appendChild(note);
 
     // Minimize
@@ -240,6 +236,8 @@ function loadChapter(id) {
     const chapter = chapters.find(c => c.id === id);
     if (!chapter) return;
     entry.value = chapter.content || "";
+    entry.style.height = 'auto';
+    entry.style.height = entry.scrollHeight + 'px';
     currentChapterId = id;
     localStorage.setItem("currentChapter", id);
 }
