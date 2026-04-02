@@ -78,6 +78,7 @@ function createNote(data = {}) {
     note.className = "sticky-note";
     note.dataset.id = data.id || Date.now().toString();
     note.dataset.color = data.color || "color-1";
+    note.dataset.texture = data.texture || "";
     note.dataset.minimized = data.minimized || false;
     note.style.top = data.top || "50px";
     note.style.left = data.left || "220px";
@@ -149,17 +150,22 @@ textures.forEach(t => {
     option.style.backgroundImage = `url(${t.img})`;
 
     option.addEventListener("click", e => {
-        // remove old texture
-        note.classList.remove("note-parchment", "note-map", "note-charred", "apothecary-note", "note-herbs");
+    // remove ALL texture classes
+    note.classList.remove(
+        "note-parchment",
+        "note-map",
+        "note-charred",
+        "apothecary-note",
+        "note-herbs"
+    );
 
-        // apply new
-        note.classList.add(t.name);
-        note.dataset.texture = t.name;
+    // apply selected texture
+    note.classList.add(t.name);
+    note.dataset.texture = t.name;
 
-        textureSelector.style.display = "none";
-        saveNotes();
-        e.stopPropagation();
-    });
+    saveNotes();
+    e.stopPropagation();
+});
 
     textureSelector.appendChild(option);
 });
