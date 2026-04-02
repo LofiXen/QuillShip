@@ -323,6 +323,12 @@ body, input, textarea, button, a {
     pointer-events: auto;
 }
 
+.sticky-colors.show-selectors,
+.sticky-textures.show-selectors {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
 /* Sticky dock */
 .sticky-dock {
     position: fixed;
