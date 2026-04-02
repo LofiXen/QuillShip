@@ -15,6 +15,7 @@
 
 /* Burn box */
 .burn-box {
+	position: relative;
     width: 360px;
     padding: 25px;
     background: #f2e0c7;
@@ -175,7 +176,9 @@ body, input, textarea, button, a {
 .sidebar { 
 	width: 200px; 
 	min-width: 200px; 
-    background: #9b765b; 
+    background-image: url('https://i.imgur.com/0smEs5s.jpeg');
+	background-size: cover;
+	background-position: center;
     padding: 10px; 
     display: flex; 
     flex-direction: column; 
@@ -207,7 +210,7 @@ body, input, textarea, button, a {
     resize: both;
     overflow: auto;
     z-index: 10;
-    background: #f0d8c0;
+    background-color: #f0d8c0;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 6px;
     font-family: 'Cormorant Garamond', serif;
@@ -286,12 +289,36 @@ body, input, textarea, button, a {
     gap: 4px;
     margin-top: 4px;
 }
+
 .color-option {
     width: 20px;
     height: 20px;
     border-radius: 3px;
     cursor: pointer;
     border: 1px solid #555;
+}
+
+.texture-option {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #555;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+}
+
+/* 👁️ Hide both until hovering the note */
+.sticky-colors,
+.sticky-textures {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.sticky-note:hover .sticky-colors,
+.sticky-note:hover .sticky-textures {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Sticky dock */
