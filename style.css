@@ -190,6 +190,22 @@ body, input, textarea, button, a {
     z-index: 2; 
 }
 
+#chapters {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.chapter-header {
+    padding: 6px 10px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #3e2f1f;
+}
+
 #add-note, #add-chapter {
 	background-image: url('https://i.imgur.com/eLqxAc0.jpeg');
     background-size: cover;
