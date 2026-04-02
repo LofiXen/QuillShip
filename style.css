@@ -15,7 +15,6 @@
 
 /* Burn box */
 .burn-box {
-	position: relative;
     width: 360px;
     padding: 25px;
     background: #f2e0c7;
@@ -77,17 +76,6 @@ body {
 
 body, input, textarea, button, a {
     cursor: none !important;
-}
-
-.sticky-note {
-    opacity: 0;
-    pointer-events: none;
-    position: absolute; /* if not already */
-    transition: opacity 0.2s ease;
-}
-.sticky-note.active {
-    opacity: 1;
-    pointer-events: auto;
 }
 
 #burn-modal, #burn-modal * {
@@ -184,9 +172,9 @@ body, input, textarea, button, a {
 }
 
 /* Sidebar */ 
-.sidebar {
-    width: 200px;
-    min-width: auto;
+.sidebar { 
+	width: 200px; 
+	min-width: 200px; 
     background-image: url('Gemini_Generated_Image_rokbxprokbxprokb-fotor-bg-remover-20260402133720.png');
     background-repeat: no-repeat;
     background-size: cover;
@@ -196,7 +184,7 @@ body, input, textarea, button, a {
     flex-direction: column; 
     gap: 10px; 
     border-right: 2px solid #d1bfa3; 
-    overflow: visible; /* let it grow with content */
+    overflow-y: visible; 
     position: relative; 
     z-index: 2; 
 }
@@ -222,14 +210,40 @@ body, input, textarea, button, a {
     resize: both;
     overflow: auto;
     z-index: 10;
-
     background-color: #f0d8c0;
-    background-size: cover;
-    background-position: center;
-
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 6px;
+    font-family: 'Cormorant Garamond', serif;
 }
+.note-parchment {
+    background-image: url('https://i.imgur.com/Cv01Drl.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.note-map {
+    background-image: url('https://i.imgur.com/FIP9uxt.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.note-charred {
+    background-image: url('https://i.imgur.com/7c1ZSvj.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+.apothecary-note {
+	background-image: url('https://i.imgur.com/2hPxgn7.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.note-herbs {
+	background-image: url('https://i.imgur.com/br2x1ET.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
 
 /* Header for drag & buttons */
 .note-header {
@@ -253,11 +267,7 @@ body, input, textarea, button, a {
     padding: 6px;
     min-height: 60px;
     outline: none;
-    color: rgba(0,0,0,0.85);
-
-    background: rgba(255, 248, 235, 0.6);
-    backdrop-filter: blur(1px);
-    border-radius: 4px;
+    color: rgba(0,0,0,0.45);
 }
 
 .delete-note, .minimize-note {
@@ -275,22 +285,12 @@ body, input, textarea, button, a {
     gap: 4px;
     margin-top: 4px;
 }
-
 .color-option {
     width: 20px;
     height: 20px;
     border-radius: 3px;
     cursor: pointer;
     border: 1px solid #555;
-}
-
-.texture-option {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #555;
-    cursor: pointer;
-    background-size: cover;
-    background-position: center;
 }
 
 /* Sticky dock */
@@ -380,10 +380,6 @@ body, input, textarea, button, a {
     height: 60px;
     pointer-events: none;
     z-index: 9999;
-    background-image: url('QuillCursor-fotor-bg-remover-20260329143216.png'); /* replace with your cursor image */
-    background-size: contain;
-    background-repeat: no-repeat;
-    transform: translate(-50%, -50%);
 }
 
 .export-import {
