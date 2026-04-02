@@ -129,48 +129,7 @@ function createNote(data = {}) {
             body.innerText = "Don't waste your schedulae...";
             body.style.color = "rgba(0,0,0,0.45)";
         }
-    });
-
-    // Color selector
-    const colorSelector = document.createElement("div");
-    colorSelector.className = "sticky-colors";
-    const textureSelector = document.createElement("div");
-textureSelector.className = "sticky-textures";
-
-const textures = [
-    { name: "note-parchment", img: "https://i.imgur.com/Cv01Drl.jpeg" },
-    { name: "note-map", img: "https://i.imgur.com/FIP9uxt.jpeg" },
-    { name: "note-charred", img: "https://i.imgur.com/7c1ZSvj.jpeg" },
-    { name: "apothecary-note", img: "https://i.imgur.com/2hPxgn7.jpeg"},
-    { name: "note-herbs", img: "https://i.imgur.com/br2x1ET.jpeg"}
-];
-
-textures.forEach(t => {
-    const option = document.createElement("div");
-    option.className = "texture-option";
-    option.style.backgroundImage = `url(${t.img})`;
-
-    option.addEventListener("click", e => {
-    // remove ALL texture classes
-    note.classList.remove(
-    "note-parchment",
-    "note-map",
-    "note-charred",
-    "apothecary-note",
-    "note-herbs"
-);
-note.classList.add(t.name);
-note.dataset.texture = t.name;
-
-// Hide selectors by removing hover-trigger class
-colorSelector.classList.remove("show-selectors");
-textureSelector.classList.remove("show-selectors");
-
-saveNotes();
-e.stopPropagation();
-});
-
-    textureSelector.appendChild(option);
+    
 });
     const colors = ['color-1','color-2','color-3','color-4','color-5',
                     'color-6','color-7','color-8','color-9','color-10',
@@ -179,15 +138,6 @@ e.stopPropagation();
         const swatch = document.createElement("div");
         swatch.className = `color-option ${c}`;
         swatch.addEventListener("click", e => {
-    // remove old color
-    note.classList.remove(note.dataset.color);
-    note.classList.remove(
-        "note-parchment",
-        "note-map",
-        "note-charred",
-        "apothecary-note",
-        "note-herbs"
-    );
     note.dataset.texture = "";
     // apply new color
     note.classList.add(c);
@@ -290,8 +240,6 @@ function loadChapter(id) {
     const chapter = chapters.find(c => c.id === id);
     if (!chapter) return;
     entry.value = chapter.content || "";
-    entry.style.height = 'auto';
-    entry.style.height = entry.scrollHeight + 'px';
     currentChapterId = id;
     localStorage.setItem("currentChapter", id);
 }
