@@ -95,7 +95,6 @@ body, input, textarea, button, a {
     background: url('https://i.imgur.com/vKA1DiL.png') repeat-y;
     background-size: 100% auto;
     background-position: top center;
-    color: #c47a62;
     text-shadow: 0.3px 0.3px 0 #84674e, 0.5px 0.5px 0 rgba(0,0,0,0.2);
     font-family: 'Cormorant Garamond', serif;
     line-height: 1.6;
@@ -103,6 +102,10 @@ body, input, textarea, button, a {
     box-sizing: border-box;
     outline: none;
     overflow: hidden;
+}
+
+.entry {
+    color: #c47a62 !important;
 }
 
 /* Placeholder styling */
