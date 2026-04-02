@@ -153,21 +153,21 @@ textures.forEach(t => {
     option.addEventListener("click", e => {
     // remove ALL texture classes
     note.classList.remove(
-        "note-parchment",
-        "note-map",
-        "note-charred",
-        "apothecary-note",
-        "note-herbs"
-    );
+    "note-parchment",
+    "note-map",
+    "note-charred",
+    "apothecary-note",
+    "note-herbs"
+);
+note.classList.add(t.name);
+note.dataset.texture = t.name;
 
-    note.classList.add(t.name);
-    note.dataset.texture = t.name;
+// Hide selectors by removing hover-trigger class
+colorSelector.classList.remove("show-selectors");
+textureSelector.classList.remove("show-selectors");
 
-    textureSelector.style.display = "none";
-    colorSelector.style.display = "none";
-
-    saveNotes();
-    e.stopPropagation();
+saveNotes();
+e.stopPropagation();
 });
 
     textureSelector.appendChild(option);
