@@ -132,6 +132,37 @@ function createNote(data = {}) {
     // Color selector
     const colorSelector = document.createElement("div");
     colorSelector.className = "sticky-colors";
+    const textureSelector = document.createElement("div");
+textureSelector.className = "sticky-textures";
+
+const textures = [
+    { name: "note-parchment", img: "https://i.imgur.com/Cv01Drl.jpeg" },
+    { name: "note-map", img: "https://i.imgur.com/FIP9uxt.jpeg" },
+    { name: "note-charred", img: "https://i.imgur.com/7c1ZSvj.jpeg" },
+    { name: "apothecary-note", img: "https://i.imgur.com/2hPxgn7.jpeg"},
+    { name: "note-herbs", img: "https://i.imgur.com/br2x1ET.jpeg"}
+];
+
+textures.forEach(t => {
+    const option = document.createElement("div");
+    option.className = "texture-option";
+    option.style.backgroundImage = `url(${t.img})`;
+
+    option.addEventListener("click", e => {
+        // remove old texture
+        note.classList.remove("note-parchment", "note-map", "note-charred", "apothecary-note", "note-herbs");
+
+        // apply new
+        note.classList.add(t.name);
+        note.dataset.texture = t.name;
+
+        textureSelector.style.display = "none";
+        saveNotes();
+        e.stopPropagation();
+    });
+
+    textureSelector.appendChild(option);
+});
     const colors = ['color-1','color-2','color-3','color-4','color-5',
                     'color-6','color-7','color-8','color-9','color-10',
                     'color-11','color-12','color-13','color-14','color-15'];
@@ -152,6 +183,7 @@ function createNote(data = {}) {
     note.appendChild(header);
     note.appendChild(body);
     note.appendChild(colorSelector);
+    note.appendChild(textureSelector);
     document.body.appendChild(note);
 
     // Minimize
