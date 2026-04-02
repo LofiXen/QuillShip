@@ -63,7 +63,13 @@
 body {
     cursor: none !important;
     margin: 0;
-    background: #f2e9dc;
+
+    background-image: url('https://i.imgur.com/RX6H8PA.jpeg');
+    background-size: cover;        /* fills the screen */
+    background-position: center;   /* keeps it centered */
+    background-repeat: no-repeat;  /* prevents tiling */
+    background-attachment: fixed;  /* gives that “anchored” feel */
+
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
 }
@@ -146,12 +152,12 @@ body, input, textarea, button, a {
 /* Titles */
 .title {
     font-size: 32px;
-    color: #5d542b;
+    color: #473625;
     margin: 0 40px 10px;
 }
 .subtitle {
     font-size: 13px;
-    color: #bba88d;
+    color: #e1d2b7;
     margin: 0 40px 25px;
     font-style: italic;
     letter-spacing: 0.5px;
@@ -165,27 +171,31 @@ body, input, textarea, button, a {
     position: relative;
 }
 
-/* Sidebar */
-.sidebar {
-    width: 200px;
-    min-width: 200px;
-    background: #f2e9dc;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-right: 2px solid #d1bfa3;
-    overflow-y: auto;
-    position: relative;
-    z-index: 2;
+/* Sidebar */ 
+.sidebar { 
+	width: 200px; 
+	min-width: 200px; 
+    background: #9b765b; 
+    padding: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    border-right: 2px solid #d1bfa3; 
+    overflow-y: auto; 
+    position: relative; 
+    z-index: 2; 
 }
 
 #add-note, #add-chapter {
-    background: #d1bfa3;
+	background-image: url('https://i.imgur.com/eLqxAc0.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border: none;
-    padding: 6px 10px;
-    cursor: pointer;
-    font-family: 'Cormorant Garamond', serif;
+    padding: 12px 10px;
+    color: #f4e4cb;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 /* Sticky notes */
@@ -275,13 +285,13 @@ body, input, textarea, button, a {
 }
 
 /* Colors */
-.color-1 { background:#2f3a2a; }
-.color-2 { background:#566b3a; }
-.color-3 { background:#9b8a55; }
-.color-4 { background:#d2b673; }
-.color-5 { background:#f1e1ba; }
-.color-6 { background:#ba7e43; }
-.color-7 { background:#b59a76; }
+.color-1 { background:#70845e; }
+.color-2 { background:#889b69; }
+.color-3 { background:#af9e77; }
+.color-4 { background:#a46f4d; }
+.color-5 { background:#734f35; }
+.color-6 { background:#bf9874; }
+.color-7 { background:#937d60; }
 .color-8 { background:#8b6a4a; }
 .color-9 { background:#5c4736; }
 .color-10 { background:#c28868; }
@@ -348,13 +358,13 @@ body, input, textarea, button, a {
 }
 
 .export-import button {
-    background: #d1bfa3;
+	background-image: url('https://i.imgur.com/eLqxAc0.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border: none;
-    padding: 6px;
-    font-family: 'Cormorant Garamond', serif;
-    cursor: pointer;
-}
-
-#import-file {
-    margin-top: 5px;
-}
+    padding: 12px 10px;
+    color: #f4e4cb;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
