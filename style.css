@@ -175,10 +175,8 @@ body, input, textarea, button, a {
 .sidebar { 
 	width: 200px; 
 	min-width: 200px; 
-    background-image: url('Gemini_Generated_Image_rokbxprokbxprokb-fotor-bg-remover-20260402133720.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top center;
+    background-color: transparent;
+    background-repeat: repeat-y;
     padding: 10px; 
     display: flex; 
     flex-direction: column; 
