@@ -150,7 +150,6 @@ textures.forEach(t => {
     option.style.backgroundImage = `url(${t.img})`;
 
     option.addEventListener("click", e => {
-    // remove ALL texture classes
     note.classList.remove(
         "note-parchment",
         "note-map",
@@ -159,7 +158,9 @@ textures.forEach(t => {
         "note-herbs"
     );
 
-    // apply selected texture
+    note.classList.remove(note.dataset.color);
+
+    // apply texture
     note.classList.add(t.name);
     note.dataset.texture = t.name;
 
@@ -176,13 +177,22 @@ textures.forEach(t => {
         const swatch = document.createElement("div");
         swatch.className = `color-option ${c}`;
         swatch.addEventListener("click", e => {
-            note.classList.remove(note.dataset.color);
-            note.classList.add(c);
-            note.dataset.color = c;
-            colorSelector.style.display = "none";
-            saveNotes();
-            e.stopPropagation();
-        });
+    // remove old color
+    note.classList.remove(note.dataset.color);
+    note.classList.remove(
+        "note-parchment",
+        "note-map",
+        "note-charred",
+        "apothecary-note",
+        "note-herbs"
+    );
+    note.dataset.texture = "";
+    // apply new color
+    note.classList.add(c);
+    note.dataset.color = c;
+    saveNotes();
+    e.stopPropagation();
+});
         colorSelector.appendChild(swatch);
     });
 
