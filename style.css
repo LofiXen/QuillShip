@@ -79,6 +79,17 @@ body, input, textarea, button, a {
     cursor: none !important;
 }
 
+.sticky-note {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute; /* if not already */
+    transition: opacity 0.2s ease;
+}
+.sticky-note.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 #burn-modal, #burn-modal * {
     pointer-events: auto;
     cursor: pointer !important;
