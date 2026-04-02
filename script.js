@@ -87,6 +87,7 @@ function createNote(data = {}) {
     note.classList.add(note.dataset.color);
     if (data.texture) {
     note.classList.add(data.texture);
+    note.dataset.texture = data.texture;
 }
 
     // Header
@@ -150,6 +151,7 @@ textures.forEach(t => {
     option.style.backgroundImage = `url(${t.img})`;
 
     option.addEventListener("click", e => {
+    // remove ALL texture classes
     note.classList.remove(
         "note-parchment",
         "note-map",
@@ -158,11 +160,11 @@ textures.forEach(t => {
         "note-herbs"
     );
 
-    note.classList.remove(note.dataset.color);
-
-    // apply texture
     note.classList.add(t.name);
     note.dataset.texture = t.name;
+
+    textureSelector.style.display = "none";
+    colorSelector.style.display = "none";
 
     saveNotes();
     e.stopPropagation();
