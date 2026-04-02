@@ -61,6 +61,7 @@ function saveNotes() {
             title: note.querySelector(".note-title").innerText,
             body: note.querySelector(".note-body").innerText,
             color: note.dataset.color,
+            texture: note.dataset.texture || null,
             top: note.style.top,
             left: note.style.left,
             width: note.style.width,
@@ -83,6 +84,9 @@ function createNote(data = {}) {
     note.style.width = data.width || "200px";
     note.style.height = data.height || "150px";
     note.classList.add(note.dataset.color);
+    if (data.texture) {
+    note.classList.add(data.texture);
+}
 
     // Header
     const header = document.createElement("div");
