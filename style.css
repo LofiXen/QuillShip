@@ -213,40 +213,34 @@ body, input, textarea, button, a {
     resize: both;
     overflow: auto;
     z-index: 10;
+
     background-color: #f0d8c0;
+    background-size: cover;
+    background-position: center;
+
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border-radius: 6px;
-    font-family: 'Cormorant Garamond', serif;
 }
+
 
 .note-parchment {
     background-image: url('https://i.imgur.com/Cv01Drl.jpeg');
-    background-size: cover;
-    background-position: center;
 }
 
 .note-map {
     background-image: url('https://i.imgur.com/FIP9uxt.jpeg');
-    background-size: cover;
-    background-position: center;
 }
 
 .note-charred {
     background-image: url('https://i.imgur.com/7c1ZSvj.jpeg');
-    background-size: cover;
-    background-position: center;
 }
 
 .apothecary-note {
 	background-image: url('https://i.imgur.com/2hPxgn7.jpeg');
-    background-size: cover;
-    background-position: center;
 }
 
 .note-herbs {
 	background-image: url('https://i.imgur.com/br2x1ET.jpeg');
-    background-size: cover;
-    background-position: center;
 }
 /* Header for drag & buttons */
 .note-header {
@@ -308,6 +302,13 @@ body, input, textarea, button, a {
     cursor: pointer;
     background-size: cover;
     background-position: center;
+}
+
+.sticky-textures {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
 }
 
 /* 👁️ Hide both until hovering the note */
