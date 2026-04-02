@@ -95,8 +95,8 @@ body, input, textarea, button, a {
     background: url('https://i.imgur.com/vKA1DiL.png') repeat-y;
     background-size: 100% auto;
     background-position: top center;
-    color: #bf7459 !important;
-    text-shadow: 0.3px 0.3px 0 #1a0d05, 0.5px 0.5px 0 rgba(0,0,0,0.2);
+    color: #c99e8f !important;
+    text-shadow: 0.3px 0.3px 0 #84674e, 0.5px 0.5px 0 rgba(0,0,0,0.2);
     font-family: 'Cormorant Garamond', serif;
     line-height: 1.6;
     padding: 60px 50px;
