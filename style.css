@@ -213,6 +213,35 @@ body, input, textarea, button, a {
     font-family: 'Cormorant Garamond', serif;
 }
 
+.note-parchment {
+    background-image: url('https://i.imgur.com/Cv01Drl.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.note-map {
+    background-image: url('https://i.imgur.com/FIP9uxt.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.note-charred {
+    background-image: url('https://i.imgur.com/7c1ZSvj.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.apothecary-note {
+	background-image: url('https://i.imgur.com/2hPxgn7.jpeg');
+    background-size: cover;
+    background-position: center;
+}
+
+.note-herbs {
+	background-image: url('https://i.imgur.com/br2x1ET.jpeg');
+    background-size: cover;
+    background-position: center;
+}
 /* Header for drag & buttons */
 .note-header {
     display: flex;
