@@ -231,26 +231,6 @@ body, input, textarea, button, a {
     border-radius: 6px;
 }
 
-
-.note-parchment {
-    background-image: url('https://i.imgur.com/Cv01Drl.jpeg');
-}
-
-.note-map {
-    background-image: url('https://i.imgur.com/FIP9uxt.jpeg');
-}
-
-.note-charred {
-    background-image: url('https://i.imgur.com/7c1ZSvj.jpeg');
-}
-
-.apothecary-note {
-	background-image: url('https://i.imgur.com/2hPxgn7.jpeg');
-}
-
-.note-herbs {
-	background-image: url('https://i.imgur.com/br2x1ET.jpeg');
-}
 /* Header for drag & buttons */
 .note-header {
     display: flex;
@@ -311,33 +291,6 @@ body, input, textarea, button, a {
     cursor: pointer;
     background-size: cover;
     background-position: center;
-}
-
-.sticky-textures {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 4px;
-}
-
-/* 👁️ Hide both until hovering the note */
-.sticky-colors,
-.sticky-textures {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    pointer-events: none;
-}
-
-.sticky-note:hover .sticky-colors,
-.sticky-note:hover .sticky-textures {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.sticky-colors.show-selectors,
-.sticky-textures.show-selectors {
-    opacity: 1 !important;
-    pointer-events: auto !important;
 }
 
 /* Sticky dock */
