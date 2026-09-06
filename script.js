@@ -1,3 +1,5 @@
+// Journal Save
+
 const entry = document.querySelector(".entry");
 entry.style.height = entry.scrollHeight + 'px';
 entry.addEventListener("input", () => {
