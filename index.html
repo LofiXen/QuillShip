@@ -49,10 +49,152 @@
     <div class="main-notebook">
         <div class="frame">
             <div class="notebook">
-                <div class="title">QuillShip</div>
-                <div class="subtitle">Flick your quill and calm your mind.</div>
-                <textarea class="entry" placeholder="The ink won’t write itself..."></textarea>
-            </div>
+    <div class="title">QuillShip</div>
+    <div class="subtitle">Flick your quill and calm your mind.</div>
+    <div class="editor-wrapper">
+    	
+        <div class="editor-toolbar">
+            <button type="button" data-command="bold" title="Bold">
+                <strong>B</strong>
+            </button>
+            <button type="button" data-command="italic" title="Italic">
+                <em>I</em>
+            </button>
+            <button type="button" data-command="underline" title="Underline">
+                <u>U</u>
+            </button>
+            <span class="toolbar-divider"></span>
+            <button type="button" data-command="formatBlock" data-value="h1">
+                H1
+            </button>
+            <button type="button" data-command="formatBlock" data-value="h2">
+                H2
+            </button>
+            <button type="button" data-command="formatBlock" data-value="h3">
+                H3
+            </button>
+            <button type="button" data-command="formatBlock" data-value="p">
+                ¶
+            </button>
+            <span class="toolbar-divider"></span>
+            <button type="button" data-command="insertUnorderedList">
+                •
+            </button>
+            <button type="button" data-command="insertOrderedList">
+                1.
+            </button>
+            <button type="button" data-command="formatBlock" data-value="blockquote">
+                ❝
+            </button>
+            <span class="toolbar-divider"></span>
+            <button type="button" data-command="undo">
+                ↶
+            </button>
+            <button type="button" data-command="redo">
+                ↷
+            </button>
+            <button type="button" id="insert-rule">
+                ─
+            </button>
+        </div>
+        <div
+            class="entry"
+            contenteditable="true"
+            data-placeholder="The ink won’t write itself..."
+            spellcheck="true"
+        ></div>
+    </div>
+    <!-- =========================
+         RIGHT-CLICK MENU
+         ========================= -->
+
+    <div id="editor-context-menu"
+         class="editor-context-menu">
+
+        <button type="button"
+                data-context-command="bold">
+            <strong>Bold</strong>
+            <span>Ctrl+B</span>
+        </button>
+
+        <button type="button"
+                data-context-command="italic">
+            <em>Italic</em>
+            <span>Ctrl+I</span>
+        </button>
+
+        <button type="button"
+                data-context-command="underline">
+            <u>Underline</u>
+            <span>Ctrl+U</span>
+        </button>
+
+
+        <div class="context-divider"></div>
+
+
+        <button type="button"
+                data-context-command="formatBlock"
+                data-value="h1">
+            Heading 1
+        </button>
+
+        <button type="button"
+                data-context-command="formatBlock"
+                data-value="h2">
+            Heading 2
+        </button>
+
+        <button type="button"
+                data-context-command="formatBlock"
+                data-value="h3">
+            Heading 3
+        </button>
+
+        <button type="button"
+                data-context-command="formatBlock"
+                data-value="p">
+            Normal Text
+        </button>
+
+
+        <div class="context-divider"></div>
+
+
+        <button type="button"
+                data-context-command="insertUnorderedList">
+            • Bullet List
+        </button>
+
+        <button type="button"
+                data-context-command="insertOrderedList">
+            1. Numbered List
+        </button>
+
+        <button type="button"
+                data-context-command="formatBlock"
+                data-value="blockquote">
+            ❝ Block Quote
+        </button>
+
+
+        <div class="context-divider"></div>
+
+
+        <button type="button"
+                data-context-command="insertHorizontalRule">
+            — Scene Break
+        </button>
+
+        <button type="button"
+                data-context-command="removeFormat">
+            Clear Formatting
+        </button>
+
+    </div>
+
+</div>
+</div>
         </div>
     </div>
 </div>
