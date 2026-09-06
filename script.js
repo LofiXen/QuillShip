@@ -1,9 +1,290 @@
-// Journal save
+// =========================
+// RICH TEXT EDITOR
+// =========================
+
 const entry = document.querySelector(".entry");
-entry.style.height = entry.scrollHeight + 'px';
+
+
+// =========================
+// TOOLBAR BUTTONS
+// =========================
+
+document.querySelectorAll(".editor-toolbar button").forEach(button => {
+
+    // Keep the selected text highlighted when clicking a toolbar button
+    button.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+    });
+
+    button.addEventListener("click", () => {
+
+        entry.focus();
+
+        const command = button.dataset.command;
+        const value = button.dataset.value || null;
+
+        document.execCommand(command, false, value);
+
+        saveCurrentChapter();
+    });
+
+});
+
+
+// =========================
+// HORIZONTAL RULE
+// =========================
+
+document.getElementById("insert-rule").addEventListener("mousedown", (e) => {
+    e.preventDefault();
+});
+
+document.getElementById("insert-rule").addEventListener("click", () => {
+
+    entry.focus();
+
+    document.execCommand(
+        "insertHorizontalRule",
+        false,
+        null
+    );
+
+    saveCurrentChapter();
+});
+
+
+// =========================
+// AUTOMATIC EM DASH
+// =========================
+
 entry.addEventListener("input", () => {
-    entry.style.height = 'auto';
-    entry.style.height = entry.scrollHeight + 'px';
+
+    const selection = window.getSelection();
+
+    if (selection.rangeCount) {
+
+        const node = selection.anchorNode;
+
+        if (node && node.nodeType === Node.TEXT_NODE) {
+
+            const text = node.textContent;
+
+            // Automatically change -- into —
+            if (text.endsWith("--")) {
+
+                node.textContent =
+                    text.slice(0, -2) + "—";
+
+                const range = document.createRange();
+
+                range.setStart(
+                    node,
+                    node.textContent.length
+                );
+
+                range.collapse(true);
+
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        }
+    }
+
+    saveCurrentChapter();
+});
+
+
+// =========================
+// KEYBOARD SHORTCUTS
+// =========================
+
+entry.addEventListener("keydown", (e) => {
+
+    // CTRL/CMD + B = Bold
+    if (
+        (e.ctrlKey || e.metaKey) &&
+        e.key.toLowerCase() === "b"
+    ) {
+        e.preventDefault();
+
+        document.execCommand("bold");
+
+        saveCurrentChapter();
+    }
+
+
+    // CTRL/CMD + I = Italic
+    if (
+        (e.ctrlKey || e.metaKey) &&
+        e.key.toLowerCase() === "i"
+    ) {
+        e.preventDefault();
+
+        document.execCommand("italic");
+
+        saveCurrentChapter();
+    }
+
+
+    // CTRL/CMD + U = Underline
+    if (
+        (e.ctrlKey || e.metaKey) &&
+        e.key.toLowerCase() === "u"
+    ) {
+        e.preventDefault();
+
+        document.execCommand("underline");
+
+        saveCurrentChapter();
+    }
+
+});
+
+// =========================
+// RIGHT CLICK FORMATTING MENU
+// =========================
+
+const contextMenu =
+    document.getElementById("editor-context-menu");
+
+let savedRange = null;
+
+
+// Right-click inside editor
+entry.addEventListener("contextmenu", (e) => {
+
+    e.preventDefault();
+
+    // Save the selected text/range
+    const selection = window.getSelection();
+
+    if (selection.rangeCount > 0) {
+
+        savedRange = selection.getRangeAt(0).cloneRange();
+
+    }
+
+    // Show menu
+    contextMenu.style.display = "block";
+
+    // Position menu
+    let x = e.clientX;
+    let y = e.clientY;
+
+    const menuWidth = 220;
+    const menuHeight = contextMenu.offsetHeight;
+
+    // Keep menu inside screen horizontally
+    if (x + menuWidth > window.innerWidth) {
+        x = window.innerWidth - menuWidth - 10;
+    }
+
+    // Keep menu inside screen vertically
+    if (y + menuHeight > window.innerHeight) {
+        y = window.innerHeight - menuHeight - 10;
+    }
+
+    contextMenu.style.left = `${x}px`;
+    contextMenu.style.top = `${y}px`;
+});
+
+
+// Clicking a formatting option
+contextMenu.addEventListener("mousedown", (e) => {
+
+    e.preventDefault();
+
+});
+
+contextMenu.addEventListener("click", (e) => {
+
+    const button = e.target.closest("button");
+
+    if (!button) return;
+
+    // Restore selected text
+    if (savedRange) {
+
+        const selection = window.getSelection();
+
+        selection.removeAllRanges();
+
+        selection.addRange(savedRange);
+
+    }
+
+    entry.focus();
+
+    const command =
+        button.dataset.contextCommand;
+
+    const value =
+        button.dataset.value || null;
+
+
+    // Scene break
+    if (command === "insertHorizontalRule") {
+
+        document.execCommand(
+            "insertHorizontalRule",
+            false,
+            null
+        );
+
+    }
+
+    // Everything else
+    else {
+
+        document.execCommand(
+            command,
+            false,
+            value
+        );
+
+    }
+
+    saveCurrentChapter();
+
+    hideContextMenu();
+
+});
+
+
+// Hide menu
+function hideContextMenu() {
+
+    contextMenu.style.display = "none";
+
+    savedRange = null;
+
+}
+
+
+// Click elsewhere
+document.addEventListener("mousedown", (e) => {
+
+    if (
+        !contextMenu.contains(e.target) &&
+        !entry.contains(e.target)
+    ) {
+
+        hideContextMenu();
+
+    }
+
+});
+
+
+// Escape closes menu
+document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Escape") {
+
+        hideContextMenu();
+
+    }
+
 });
 
 // MUSIC (fade-in system)
