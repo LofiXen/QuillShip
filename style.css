@@ -374,16 +374,14 @@ font-family: 'Cormorant Garamond', serif;
 cursor: inherit;
 }
 
-/* Quill cursor */
-#quill-cursor {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
+/* Quill cursor */ 
+#quill-cursor { 
+    position: fixed; 
+    width: 60px; 
+    height: 60px; 
+    pointer-events: none; 
+    z-index: 9999; 
 }
-```
 
 
 .export-import {
