@@ -1,58 +1,65 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-    <head> 
-        <meta charset="UTF-8"> 
-        <title>QuillShip</title> 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-            
-        </script> 
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Inter&display=swap" rel="stylesheet"> 
-        <link rel="stylesheet" href="style.css"> <!-- Link to external CSS --> 
-    </head> 
-    <body>
-<div id="burn-modal" class="burn-hidden">
-    <div class="burn-box">
-        <div id="burn-text" class="burn-text"></div>
-        <div class="burn-actions">
-            <button id="burn-confirm">Burn</button>
-            <button id="burn-cancel">Keep</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QuillShip</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+</head>
+
+<body>
+
+    <div id="burn-modal" class="burn-hidden">
+        <div class="burn-box">
+            <div id="burn-text" class="burn-text"></div>
+            <div class="burn-actions">
+                <button id="burn-confirm">Burn</button>
+                <button id="burn-cancel">Keep</button>
+            </div>
         </div>
     </div>
-</div>
 
-<img src="QuillCursor-fotor-bg-remover-20260329143216.png" id="quill-cursor">
+    <img src="QuillCursor-fotor-bg-remover-20260329143216.png" id="quill-cursor">
 
-<!-- MUSIC -->
-<audio id="ship-music" loop>
-    <source src="coulou's cafe trumpet meditations (no. 41).mp3" type="audio/mpeg">
-</audio>
-<button id="music-toggle">🔊</button>
+    <!-- MUSIC -->
+    <audio id="ship-music" loop>
+        <source src="coulou's cafe trumpet meditations (no. 41).mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-toggle">🔊</button>
 
-<div class="notebook-with-sidebar">
-<div class="sidebar">
-    <button id="add-note">+ Add Note</button>
-    <button id="add-chapter">+ New Chapter</button>
-    <div id="chapters"></div>
+    <div class="notebook-with-sidebar">
+    <div class="sidebar">
+        <button id="add-note">+ Add Note</button>
+        <button id="add-chapter">+ New Chapter</button>
+        <div id="chapters"></div>
 
-    <!-- EXPORT / IMPORT (NOW INSIDE SIDEBAR) -->
-    <div class="export-import">
-
+        <!-- EXPORT / IMPORT (NOW INSIDE SIDEBAR) -->
+        <div class="export-import">
 <button onclick="exportData('txt')">Export TXT</button>
 <button onclick="exportData('doc')">Export DOC</button>
 <button onclick="exportData('json')">Export JSON</button>
 <button onclick="exportData('pdf')">Export PDF</button>
 
-<input type="file" id="importFile" style="display:none" onchange="importData(this.files[0])"> <button onclick="document.getElementById('importFile').click()">Import</button> </div> </div>
-<div class="main-notebook">
-    <div class="frame">
-        <div class="notebook">
-            <div class="title">QuillShip</div>
-            <div class="subtitle">Flick your quill and calm your mind.</div>
-            <textarea class="entry" placeholder="The ink won’t write itself..."></textarea>
+<input type="file" id="importFile" style="display:none" onchange="importData(this.files[0])">
+<button onclick="document.getElementById('importFile').click()">Import</button>
+        </div>
+    </div>
+
+    <div class="main-notebook">
+        <div class="frame">
+            <div class="notebook">
+                <div class="title">QuillShip</div>
+                <div class="subtitle">Flick your quill and calm your mind.</div>
+                <textarea class="entry" placeholder="The ink won’t write itself..."></textarea>
+            </div>
         </div>
     </div>
 </div>
-</div> <!-- Sticky Dock --> <div class="sticky-dock"></div>
-<script src="script.js"></script> <!-- Link to external JS -->
-</body> 
+    <!-- Sticky Dock -->
+    <div class="sticky-dock"></div>
+
+    <script src="script.js"></script> <!-- Link to external JS -->
+    
+</body>
 </html>
